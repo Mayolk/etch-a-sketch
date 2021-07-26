@@ -1,23 +1,49 @@
-const drawingBoard = document.querySelector('#drawing');
-let drawingBoardSizeX = 40;
-let drawingBoardSizeY = 5;
-let drawingBoardSize = drawingBoardSizeX * drawingBoardSizeY;
+// Variables
 
-createDrawingBoard();
+const drawingBoardUI = document.querySelector('#drawing');
+const form = document.querySelector('#form');
+const boardWidthUI = document.querySelector('#board-width');
+const boardHeightUI = document.querySelector('#board-height');
+let drawingBoardSizeX = boardWidthUI.value;
+let drawingBoardSizeY = boardHeightUI.value;
+let drawingBoardHeight;
 
-function createDrawingBoard () {
+// Function calls & event listeners
 
-for (i = 0; i < drawingBoardSize; i++) {
-  drawingBoard.appendChild(document.createElement('div'));
+createDrawingBoard(drawingBoardUI, drawingBoardSizeX, drawingBoardSizeY);
+
+drawingBoardUI.addEventListener('mouseover', draw);
+form.addEventListener('submit', recreateDrawingBoard);
+
+// Functions
+
+function createDrawingBoard (board, sizeX, sizeY) {
+
+  for (let i = 0; i < sizeX * sizeY; i++) {
+    board.appendChild(document.createElement('div'));
+  }
+
+  for (let i = 0; i < sizeX * sizeY; i++) {
+    board.children[i].classList.add('square');
+  }
+
+  drawingBoardHeight = 720 / sizeX * sizeY;
+
+  board.setAttribute('style', `height: ${drawingBoardHeight}px; display: grid; grid-template-columns: repeat(${sizeX}, auto); grid-template-rows: repeat(${sizeY}, auto); gap: 1px;`);
 }
 
-for (j = 0; j < drawingBoardSize; j++) {
-  drawingBoard.children[j].classList.add('square');
+function draw (e) {
+  e.target.classList.remove('square');
 }
 
-// need to calculate height or width or aspect ratio
+function recreateDrawingBoard (e) {
 
-let drawingBoardHeight = 720 / drawingBoardSizeX * drawingBoardSizeY;
+  let newDrawingBoardSizeX = boardWidthUI.value;
+  let newDrawingBoardSizeY = boardHeightUI.value;
 
-drawingBoard.setAttribute('style', `height: ${drawingBoardHeight}px; display: grid; grid-template-columns: repeat(${drawingBoardSizeX}, auto); grid-template-rows: repeat(${drawingBoardSizeY}, auto); gap: 1px;`);
+  drawingBoardUI.innerHTML = ''; // Clearing the board
+
+  createDrawingBoard(drawingBoardUI, newDrawingBoardSizeX, newDrawingBoardSizeY);
+
+  e.preventDefault();
 }
