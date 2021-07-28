@@ -27,7 +27,7 @@ function createDrawingBoard (board, sizeX, sizeY) {
     board.children[i].classList.add('square');
   }
 
-  drawingBoardHeight = 540 / sizeX * sizeY;
+  drawingBoardHeight = Math.floor(540 / sizeX * sizeY);
 
   board.setAttribute('style', `height: ${drawingBoardHeight}px; display: grid; grid-template-columns: repeat(${sizeX}, auto); grid-template-rows: repeat(${sizeY}, auto);`);
 }
