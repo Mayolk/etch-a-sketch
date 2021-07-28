@@ -1,7 +1,61 @@
+:root {
+  --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --color-primary: rgb(53, 0, 139); 
+}
+
+body {
+  font-family: var(--font);
+}
+
+#title {
+  color: var(--color-primary);
+  font-size: 2.5rem;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+#inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 5px;
+}
+
+.form-group {
+  display: flex;
+  justify-content: end;
+  gap: 5px;
+}
+
+.input-control {
+  padding: 3px;
+}
+
+.input-control:focus {
+  outline: none;
+}
+
+.btn {
+  padding: .5rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
 #drawing {
-  width: 720px;
+  width: 540px;
+  border: 2px solid var(--color-primary);
 }
 
 .square {
-  background-color: red;
+  background-color: var(--color-primary);
 }
